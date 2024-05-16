@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: *.svg
+Disallow: *.png
+Disallow: *.webp
+
+Sitemap: https://michael.shumshum.dev/sitemap.xml

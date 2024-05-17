@@ -17,13 +17,13 @@
         path.style.animationTimingFunction = "ease";
         path.style.animationFillMode = "forwards";
         if (path.classList.contains("second-stage")) {
-          path.style.animationDelay = "950ms";
+          path.style.animationDelay = "1150ms";
           path.style.animationDuration = "350ms";
         } else {
           path.style.animationDuration = "1s";
-          path.style.animationDelay = "200ms";
+          path.style.animationDelay = "400ms";
         }
-        keyframesStyles += `@keyframes kf-${length.replaceAll(".", "")} { from { stroke-dashoffset: ${path.classList.contains("flip") ? "" : "-"}${length}px;} to { stroke-dashoffset:  0px;} }`;
+        keyframesStyles += `@keyframes kf-${length.replaceAll(".", "")}{from{ stroke-dashoffset:${path.classList.contains("flip") ? "" : "-"}${length}px;}to{stroke-dashoffset:0px;}}`;
       },
     );
     keyframesStyles += "</style>";

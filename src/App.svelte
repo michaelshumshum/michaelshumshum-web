@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   if (
     import.meta.env.PROD &&
     !window.location.href.includes("michael.shumshum.dev")
@@ -7,6 +9,7 @@
   }
 
   let socialBox: HTMLDivElement;
+  let contactBox: HTMLDivElement;
 
   import Footer from "./lib/Footer.svelte";
   import InlineIcon from "./lib/InlineIcon.svelte";
@@ -25,6 +28,17 @@
       socialBox.style.transform = "scaleY(0)";
     }
   });
+
+  onMount(() => {
+    setTimeout(() => {
+      if (scrollPosition == 0) {
+        window.scrollBy({
+          top: window.innerHeight,
+          behavior: "smooth",
+        });
+      }
+    }, 3000);
+  });
 </script>
 
 <main>
@@ -33,9 +47,15 @@
     style={`height: ${Math.max(100 - (scrollPosition * 100) / window.innerHeight, 10).toFixed(1)}vh`}
   >
     <Logo />
+    <code
+      bind:this={quoteBlock}
+      style={`opacity:${scrollPosition < window.innerHeight * 0.5 ? 1 : 0}.0; transform: translateY(${
+        scrollPosition < window.innerHeight * 0.5 ? 0 : 100
+      }%); `}>building, compiling, squashing</code
+    >
   </div>
   <div id="main-content">
-    <div id="contact-box">
+    <div bind:this={contactBox} id="contact-box">
       <h1>Contact Me</h1>
       <Line thickness={2} color="#000000" />
       <a href="mailto:michael@shumshum.dev">michael@shumshum.dev</a>
@@ -60,15 +80,30 @@
     font-size: 3em;
     font-weight: 900;
   }
+  code {
+    font-family: monospace;
+    margin: 0 5vw;
+    text-align: center;
+  }
   #landing-header-hero {
+    position: relative;
     top: 0;
     background: white;
     border-bottom: 2px solid black;
     position: fixed;
     width: 100vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0 5vw;
+  }
+
+  #landing-header-hero code {
+    position: absolute;
+    transition: all 250ms ease;
+    bottom: 25%;
+    font-size: 1.5em;
   }
 
   #contact-box {

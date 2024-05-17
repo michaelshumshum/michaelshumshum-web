@@ -13,7 +13,7 @@
   import Line from "./lib/Line.svelte";
   import Logo from "./lib/Logo.svelte";
 
-  import { elementVisible } from "./lib/elementVisible";
+  import { elementVisible } from "./lib/utils";
 
   let scrollPosition: number = window.scrollY;
   window.addEventListener("scroll", () => {

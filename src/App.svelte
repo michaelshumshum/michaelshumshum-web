@@ -1,4 +1,10 @@
 <script lang="ts">
+  if (
+    import.meta.env.PROD &&
+    !window.location.href.includes("michael.shumshum.dev")
+  ) {
+    window.location.replace("https://michael.shumshum.dev");
+  }
   import Footer from "./lib/Footer.svelte";
   import Line from "./lib/Line.svelte";
   import Logo from "./lib/Logo.svelte";

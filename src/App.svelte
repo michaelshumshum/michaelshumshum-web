@@ -48,7 +48,6 @@
   >
     <Logo />
     <code
-      bind:this={quoteBlock}
       style={`opacity:${scrollPosition < window.innerHeight * 0.5 ? 1 : 0}.0; transform: translateY(${
         scrollPosition < window.innerHeight * 0.5 ? 0 : 100
       }%); `}>building, compiling, squashing</code

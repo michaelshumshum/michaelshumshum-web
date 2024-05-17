@@ -22,7 +22,7 @@
   window.addEventListener("scroll", () => {
     scrollPosition = window.scrollY;
 
-    if (elementVisible(socialBox)) {
+    if (elementVisible(contactBox)) {
       socialBox.style.transform = "scaleY(1)";
     } else {
       socialBox.style.transform = "scaleY(0)";
@@ -77,7 +77,7 @@
 
 <style>
   h1 {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 900;
   }
   code {

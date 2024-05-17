@@ -37,7 +37,7 @@
 <svg
   bind:this={svg}
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="-5 -5 1350 600"
+  viewBox="-5 -15 1350 600"
 >
   <path
     class="svg-path"
@@ -131,6 +131,12 @@
     height: max(50%, 10vh);
     position: relative;
     overflow: visible;
+  }
+
+  @media only screen and (max-width: 600px) {
+    svg {
+      max-width: 100%;
+    }
   }
 
   .svg-path {

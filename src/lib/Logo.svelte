@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
 
-  let keyframesStyles = "<style id='logo-animations'>";
+  let keyframesStyles = "<style>";
 
   let svg: SVGElement;
   onMount(() => {

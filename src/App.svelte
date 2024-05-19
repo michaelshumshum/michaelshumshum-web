@@ -15,9 +15,11 @@
   import InlineIcon from "./lib/InlineIcon.svelte";
   import Line from "./lib/Line.svelte";
   import Logo from "./lib/Logo.svelte";
+  import smoothscroll from "smoothscroll-polyfill"; // scroll-behavior: smooth polyfill for unsupported browsers
 
   import { elementVisible } from "./lib/utils";
 
+  smoothscroll.polyfill();
   let scrollPosition: number = window.scrollY;
   window.addEventListener("scroll", () => {
     scrollPosition = window.scrollY;
@@ -81,7 +83,6 @@
   }
   code {
     font-family: monospace;
-    margin: 0 5vw;
     text-align: center;
   }
   #landing-header-hero {

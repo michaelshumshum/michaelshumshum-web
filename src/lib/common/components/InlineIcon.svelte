@@ -2,7 +2,7 @@
   export let src: string;
 </script>
 
-<span><img {src} alt="src" draggable={false} /></span>
+<span><img {src} alt={src} draggable={false} /></span>
 
 <style>
   img {

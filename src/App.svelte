@@ -208,4 +208,13 @@
     margin-top: 100vh;
     min-height: 90vh;
   }
+
+  @media (max-width: 800px) {
+    #main-content {
+      padding: 10vh 5vw;
+    }
+    #social-box {
+      flex-direction: column;
+    }
+  }
 </style>

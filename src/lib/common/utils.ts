@@ -64,5 +64,3 @@ export function randomString(
 
 	return result;
 }
-
-console.log(randomString(100));

@@ -1,0 +1,85 @@
+<script lang="ts">
+  import { scrollPosition, windowSize } from "./common/stores";
+  import { randomString } from "./common/utils";
+  import { onMount } from "svelte";
+  import { elementVisible } from "./common/utils";
+
+  /**
+   * How much "hacker text" to generate
+   */
+  const _text_length = 50000;
+  const _font_size = 36;
+  let ctx: CanvasRenderingContext2D | null = null;
+
+  let element: HTMLDivElement;
+  let canvas: HTMLCanvasElement;
+
+  let text = randomString(_text_length);
+  $: if (text && ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = `${_font_size}px monospace`;
+    ctx.fillStyle = "black";
+
+    const necessaryLines = Math.ceil(canvas.height / _font_size);
+    const lineLength = Math.ceil(_text_length / necessaryLines);
+
+    for (let i = 0; i < necessaryLines; i++) {
+      const line = text.slice(i * lineLength, (i + 1) * lineLength);
+      ctx.fillText(line, 0, (i + 1) * _font_size);
+    }
+    // ctx.fillText(text, 0, _font_size);
+  }
+
+  const resizeCanvas = () => {
+    if (element && canvas) {
+      canvas.width = element.clientWidth * window.devicePixelRatio;
+      canvas.height = element.clientHeight * window.devicePixelRatio;
+      canvas.style.width = `${element.clientWidth}px`;
+      canvas.style.height = `${element.clientHeight}px`;
+    }
+  };
+
+  windowSize.subscribe(() => {
+    resizeCanvas();
+  });
+
+  onMount(() => {
+    ctx = canvas.getContext("2d");
+    resizeCanvas();
+    setInterval(() => {
+      if (element && elementVisible(element)) text = randomString(_text_length);
+    }, 500);
+  });
+</script>
+
+<div bind:this={element} id="pseudo-hacker">
+  <canvas bind:this={canvas}></canvas>
+  <div><slot /></div>
+</div>
+
+<style>
+  #pseudo-hacker {
+    border-radius: 2em;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3vh;
+    margin: 5vh 0;
+  }
+  #pseudo-hacker > div {
+    border-radius: 2em;
+    padding: 5vh;
+    background: white;
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+  }
+  canvas {
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+</style>

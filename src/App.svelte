@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-
   if (
     import.meta.env.PROD &&
     !window.location.href.includes("michael.shumshum.dev")
@@ -11,29 +9,28 @@
   let socialBox: HTMLDivElement;
   let contactBox: HTMLDivElement;
 
+  import { onMount } from "svelte";
   import Footer from "./lib/Footer.svelte";
-  import InlineIcon from "./lib/InlineIcon.svelte";
-  import Line from "./lib/Line.svelte";
+  import InlineIcon from "./lib/common/components/InlineIcon.svelte";
+  import Line from "./lib/common/components/Line.svelte";
   import Logo from "./lib/Logo.svelte";
   import smoothscroll from "smoothscroll-polyfill"; // scroll-behavior: smooth polyfill for unsupported browsers
 
-  import { elementVisible } from "./lib/utils";
+  import { get } from "svelte/store";
+  import { scrollPosition } from "./lib/common/stores";
+  import PsuedoHacker from "./lib/PsuedoHacker.svelte";
 
   smoothscroll.polyfill();
-  let scrollPosition: number = window.scrollY;
-  window.addEventListener("scroll", () => {
-    scrollPosition = window.scrollY;
 
-    if (elementVisible(contactBox)) {
-      socialBox.style.transform = "scaleY(1)";
-    } else {
-      socialBox.style.transform = "scaleY(0)";
-    }
+  let currentScrollPosition = 0;
+
+  scrollPosition.subscribe((value) => {
+    currentScrollPosition = value;
   });
 
   onMount(() => {
     setTimeout(() => {
-      if (scrollPosition == 0) {
+      if (get(scrollPosition) === 0) {
         window.scrollBy({
           top: window.innerHeight,
           behavior: "smooth",
@@ -46,16 +43,47 @@
 <main>
   <div
     id="landing-header-hero"
-    style={`height: ${Math.max(100 - (scrollPosition * 100) / window.innerHeight, 10).toFixed(1)}vh`}
+    style={`height: ${Math.max(100 - (currentScrollPosition * 100) / window.innerHeight, 10).toFixed(1)}vh`}
   >
     <Logo />
     <code
-      style={`opacity:${scrollPosition < window.innerHeight * 0.5 ? 1 : 0}.0; transform: translateY(${
-        scrollPosition < window.innerHeight * 0.5 ? 0 : 100
+      style={`opacity:${currentScrollPosition < window.innerHeight * 0.5 ? 1 : 0}.0; transform: translateY(${
+        currentScrollPosition < window.innerHeight * 0.5 ? 0 : 100
       }%); `}>building, compiling, squashing</code
     >
   </div>
   <div id="main-content">
+    <PsuedoHacker>
+      <div id="experience-box">
+        <h2>Experience</h2>
+        <Line />
+        <div class="experience-entry">
+          <h4>
+            Software Engineer Intern – Bowtie Life Insurance Insurance Hong Kong
+          </h4>
+          <h5>June 2024 - August 2024</h5>
+        </div>
+        <div class="experience-entry">
+          <h4>IT Technical Intern – iCHEF Hong Kong</h4>
+          <h5>June 2023 - August 2023</h5>
+        </div>
+      </div>
+      <br />
+      <div id="education-box">
+        <h2>Education</h2>
+        <Line />
+        <div class="education-entry">
+          <h4>
+            Bachelor of Science in Computer Science – Arizona State University
+          </h4>
+          <h5>August 2022 - December 2025 (PRESENT)</h5>
+        </div>
+        <div class="education-entry">
+          <h4>High School Diploma – Hong Kong International School</h4>
+          <h5>August 2029 - May 2022</h5>
+        </div>
+      </div></PsuedoHacker
+    >
     <div bind:this={contactBox} id="contact-box">
       <h1>Contact Me</h1>
       <Line thickness={2} color="#000000" />
@@ -77,15 +105,15 @@
 </main>
 
 <style>
-  h1 {
-    font-size: 2em;
-    font-weight: 900;
-  }
+  @import "app.css";
+
   code {
     font-family: monospace;
     text-align: center;
   }
   #landing-header-hero {
+    z-index: 1000;
+    background: white;
     position: relative;
     top: 0;
     background: white;
@@ -106,11 +134,44 @@
     font-size: 1.5em;
   }
 
+  #experience-box,
+  #education-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: start;
+  }
+
+  .experience-entry,
+  .education-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1em;
+    padding: 1em 0 1em 1em;
+    margin-left: 1em;
+    border-left: 2px solid black;
+    position: relative;
+  }
+
+  .experience-entry::before,
+  .education-entry::before {
+    content: "";
+    display: block;
+    background: black;
+    border-radius: 100%;
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    left: -4px;
+    top: -4px;
+  }
+
   #contact-box {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 2vh;
+    gap: 1em;
     align-items: flex-start;
     height: 100%;
   }
@@ -125,19 +186,23 @@
     height: 100%;
   }
 
-  #contact-box a:hover {
-    transform: skew(-10deg);
-  }
-
   #social-box {
+    border-radius: 2em;
     transform-origin: top;
     transition: all 500ms ease;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
     gap: 1em;
-    padding: 1vh 0 1vh 1em;
-    border-left: 2px solid black;
+    padding: 2em;
+    border: 2px solid black;
+    width: 100%;
   }
+
+  #social-box > a {
+    width: 100%;
+  }
+
   #main-content {
     padding: 15vh 10vw;
     margin-top: 100vh;

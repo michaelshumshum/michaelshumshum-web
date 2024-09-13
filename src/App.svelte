@@ -80,7 +80,7 @@
         </div>
         <div class="education-entry">
           <h4>High School Diploma – Hong Kong International School</h4>
-          <h5>August 2020 - May 2022</h5>
+          <h5>August 2019 - May 2022</h5>
         </div>
       </div></PsuedoHacker
     >

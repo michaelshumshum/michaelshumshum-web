@@ -6,9 +6,6 @@
     window.location.replace("https://michael.shumshum.dev");
   }
 
-  let socialBox: HTMLDivElement;
-  let contactBox: HTMLDivElement;
-
   import { onMount } from "svelte";
   import Footer from "./lib/Footer.svelte";
   import InlineIcon from "./lib/common/components/InlineIcon.svelte";
@@ -20,6 +17,8 @@
   import { scrollPosition } from "./lib/common/stores";
   import PsuedoHacker from "./lib/PsuedoHacker.svelte";
   import Pattern from "./lib/Pattern.svelte";
+  import IconLink from "./lib/common/components/IconLink.svelte";
+  import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
 
   smoothscroll.polyfill();
 
@@ -84,20 +83,42 @@
         </div>
       </div></PsuedoHacker
     >
-    <div bind:this={contactBox} id="contact-box">
-      <h1>Contact Me</h1>
-      <Line thickness={2} color="#000000" />
-      <a href="mailto:michael@shumshum.dev">michael@shumshum.dev</a>
-      <div bind:this={socialBox} id="social-box">
-        <a target="_blank" href="https://github.com/michaelshumshum"
-          ><InlineIcon src="social-icons/github.svg" />GitHub</a
-        >
-        <a target="_blank" href="https://www.linkedin.com/in/michaelshumshum/"
-          ><InlineIcon src="social-icons/linkedin.svg" />LinkedIn</a
-        >
-        <a target="_blank" href="https://www.instagram.com/michael.shumshum"
-          ><InlineIcon src="social-icons/instagram.svg" />Instagram</a
-        >
+    <div id="personal-section">
+      <div id="about-me">
+        <h1>About Me</h1>
+        <Line />
+        <p>skateboarding, computer science, eating good food</p>
+      </div>
+      <div id="contact-box">
+        <h1>Contact Me</h1>
+        <Line />
+        <div class="social-links">
+          <!-- this email icon looks terrible imo and doesn't fit aesthetically-->
+          <HoverTooltip content="michael@shumshum.dev">
+            <IconLink
+              href="mailto:michael@shumshum.dev"
+              src="social-icons/email.svg"
+            />
+          </HoverTooltip>
+          <HoverTooltip content="GitHub">
+            <IconLink
+              href="https://www.github.com/michaelshumshum"
+              src="social-icons/github.svg"
+            />
+          </HoverTooltip>
+          <HoverTooltip content="LinkedIn">
+            <IconLink
+              href="https://www.linkedin.com/in/michaelshumshum"
+              src="social-icons/linkedin.svg"
+            />
+          </HoverTooltip>
+          <HoverTooltip content="Instagram">
+            <IconLink
+              href="https://www.instagram.com/michael.shumshum"
+              src="social-icons/instagram.svg"
+            />
+          </HoverTooltip>
+        </div>
       </div>
     </div>
   </div>
@@ -168,40 +189,25 @@
     top: -4px;
   }
 
-  #contact-box {
+  #personal-section {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    grid-template-rows: 1fr;
+    gap: 5em;
+  }
+
+  #personal-section > div {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     gap: 1em;
-    align-items: flex-start;
-    height: 100%;
   }
 
-  #contact-box a {
-    text-decoration: none;
-    border-bottom: 2px solid black;
-    color: black;
-    font-size: 1.2em;
-    padding: 0.2vh 1vw 0.2vh 0.5vw;
-    transition: all 200ms ease;
-    height: 100%;
-  }
-
-  #social-box {
-    border-radius: 2em;
-    transform-origin: top;
-    transition: all 500ms ease;
+  .social-links {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    gap: 1em;
-    padding: 2em;
-    border: 2px solid black;
-    width: 100%;
-  }
-
-  #social-box > a {
-    width: 100%;
+    justify-content: space-between;
+    height: 3em;
+    padding: 0 4em;
   }
 
   #main-content {
@@ -216,6 +222,10 @@
     }
     #social-box {
       flex-direction: column;
+    }
+    #personal-section {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
     }
   }
 </style>

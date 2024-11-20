@@ -11,7 +11,7 @@
   let img: HTMLImageElement;
   let currentTexture = 0;
 
-  function generateTextures() {
+  async function generateTextures() {
     let text = "michaelshumshum ".repeat(_text_length / 15);
     const tempCanvas = document.createElement("canvas");
     const tempCtx = tempCanvas.getContext("2d");
@@ -40,16 +40,13 @@
       textures.push(tempCanvas.toDataURL("image/png", 0.2));
     }
   }
-
-  function draw() {
-    img.src = textures[currentTexture];
-  }
-
   onMount(() => {
     generateTextures();
     setInterval(() => {
+      // TODO: when resizing, the image is stretched or shrank, which results in a unintended pattern look
+      // regenerating the textures on windowSize change is a possible solution, but it results in a lag spike as a result of the heavy graphics computation
       currentTexture = (currentTexture + 1) % textures.length;
-      draw();
+      img.src = textures[currentTexture];
     }, 50);
   });
 </script>
@@ -61,5 +58,9 @@
     position: absolute;
     left: 0;
     top: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: 50% 50%;
   }
 </style>

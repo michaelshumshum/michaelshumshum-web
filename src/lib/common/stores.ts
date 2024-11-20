@@ -1,4 +1,4 @@
-import { readable } from "svelte/store";
+import { readable, writable } from "svelte/store";
 
 export const scrollPosition = readable<number>(0, (set) => {
 	window.addEventListener("scroll", (e) => {
@@ -20,3 +20,5 @@ export const windowSize = readable<{ width: number; height: number }>(
 		});
 	},
 );
+
+export const loadingSemaphore = writable<number>(0);

@@ -14,11 +14,12 @@
   import smoothscroll from "smoothscroll-polyfill"; // scroll-behavior: smooth polyfill for unsupported browsers
 
   import { get } from "svelte/store";
-  import { scrollPosition } from "./lib/common/stores";
+  import { loadingSemaphore, scrollPosition } from "./lib/common/stores";
   import PsuedoHacker from "./lib/PsuedoHacker.svelte";
   import Pattern from "./lib/Pattern.svelte";
   import IconLink from "./lib/common/components/IconLink.svelte";
   import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
+  import LoadingSplash from "./lib/common/components/LoadingSplash.svelte";
 
   smoothscroll.polyfill();
 
@@ -26,6 +27,13 @@
 
   scrollPosition.subscribe((value) => {
     currentScrollPosition = value;
+  });
+
+  let ready = false;
+
+  loadingSemaphore.subscribe((value) => {
+    ready = value === 0;
+    console.log(ready);
   });
 
   onMount(() => {
@@ -41,6 +49,9 @@
 </script>
 
 <main>
+  {#if !ready}
+    <LoadingSplash />
+  {/if}
   <div
     id="landing-header-hero"
     style={`height: ${Math.max(100 - (currentScrollPosition * 100) / window.innerHeight, 10).toFixed(1)}vh`}
@@ -231,9 +242,6 @@
     }
     #main-content {
       padding: 10vh 5vw;
-    }
-    #social-box {
-      flex-direction: column;
     }
     #personal-section {
       grid-template-columns: 1fr;

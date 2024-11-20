@@ -1,3 +1,5 @@
+import { loadingSemaphore } from "./stores";
+
 const _UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const _LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
 const _DIGITS = "1234567890";
@@ -63,4 +65,14 @@ export function randomString(
 	}
 
 	return result;
+}
+
+/**
+ * Increments the loading semaphore.
+ * @returns A function that decrements the loading semaphore.
+ */
+export function incrementLoadingSemaphore() {
+	loadingSemaphore.update((n) => n + 1);
+
+	return () => loadingSemaphore.update((n) => n - 1);
 }

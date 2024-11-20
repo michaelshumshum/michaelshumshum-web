@@ -2,6 +2,9 @@
   import { onMount } from "svelte";
   import { windowSize } from "./common/stores";
   import { get } from "svelte/store";
+  import { incrementLoadingSemaphore } from "./common/utils";
+
+  const decrement = incrementLoadingSemaphore();
 
   const _font_size = 8;
   const _text_length = 500000;
@@ -41,7 +44,7 @@
     }
   }
   onMount(() => {
-    generateTextures();
+    generateTextures().then(decrement);
     setInterval(() => {
       // TODO: when resizing, the image is stretched or shrank, which results in a unintended pattern look
       // regenerating the textures on windowSize change is a possible solution, but it results in a lag spike as a result of the heavy graphics computation

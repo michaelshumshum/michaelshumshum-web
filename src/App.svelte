@@ -19,6 +19,7 @@
   import { get } from "svelte/store";
   import { scrollPosition } from "./lib/common/stores";
   import PsuedoHacker from "./lib/PsuedoHacker.svelte";
+  import Pattern from "./lib/Pattern.svelte";
 
   smoothscroll.polyfill();
 
@@ -45,6 +46,7 @@
     id="landing-header-hero"
     style={`height: ${Math.max(100 - (currentScrollPosition * 100) / window.innerHeight, 10).toFixed(1)}vh`}
   >
+    <Pattern />
     <Logo />
     <code
       style={`opacity:${currentScrollPosition < window.innerHeight * 0.5 ? 1 : 0}.0; transform: translateY(${
@@ -123,6 +125,7 @@
     justify-content: center;
     align-items: center;
     padding: 0 5vw;
+    overflow: hidden;
   }
 
   #landing-header-hero code {

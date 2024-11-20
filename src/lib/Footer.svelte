@@ -52,7 +52,7 @@
     border-top: 2px solid black;
     background: white;
     height: 10vh;
-    padding: 0 5vw;
+    padding: 0 10vw;
     font-weight: 900;
     width: 100%;
   }
@@ -87,5 +87,11 @@
 
   footer a img {
     height: 40%;
+  }
+
+  @media (max-width: 800px) {
+    footer {
+      padding: 0 5vw;
+    }
   }
 </style>

@@ -207,7 +207,7 @@
     flex-direction: row;
     justify-content: space-between;
     height: 3em;
-    padding: 0 4em;
+    padding-right: 4vw;
   }
 
   #main-content {
@@ -217,6 +217,18 @@
   }
 
   @media (max-width: 800px) {
+    h1 {
+      font-size: 1.5em;
+    }
+    h2 {
+      font-size: 1.2em;
+    }
+    h4 {
+      font-size: 1em;
+    }
+    h5 {
+      font-size: 0.8em;
+    }
     #main-content {
       padding: 10vh 5vw;
     }

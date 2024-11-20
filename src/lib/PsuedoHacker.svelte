@@ -82,4 +82,14 @@
     left: 0;
     position: absolute;
   }
+
+  @media (max-width: 800px) {
+    .pseudo-hacker {
+      padding: 5vw;
+    }
+
+    .pseudo-hacker > div {
+      padding: 7vw;
+    }
+  }
 </style>

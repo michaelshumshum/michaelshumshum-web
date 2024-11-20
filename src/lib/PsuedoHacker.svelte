@@ -52,13 +52,13 @@
   });
 </script>
 
-<div bind:this={element} id="pseudo-hacker">
+<div bind:this={element} class="pseudo-hacker">
   <canvas bind:this={canvas}></canvas>
   <div><slot /></div>
 </div>
 
 <style>
-  #pseudo-hacker {
+  .pseudo-hacker {
     border-radius: 2em;
     overflow: hidden;
     position: relative;
@@ -69,7 +69,7 @@
     padding: 3vh;
     margin: 5vh 0;
   }
-  #pseudo-hacker > div {
+  .pseudo-hacker > div {
     border-radius: 2em;
     padding: 5vh;
     background: white;

@@ -50,7 +50,7 @@
       // regenerating the textures on windowSize change is a possible solution, but it results in a lag spike as a result of the heavy graphics computation
       currentTexture = (currentTexture + 1) % textures.length;
       img.src = textures[currentTexture];
-    }, 50);
+    }, 75);
   });
 </script>
 

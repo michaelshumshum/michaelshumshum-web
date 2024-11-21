@@ -4,29 +4,32 @@
   let footerLink: HTMLAnchorElement;
   let footerLinkShadow: HTMLHeadingElement;
 
+  let elements: NodeListOf<HTMLElement> | null = null;
+
   const enter = () => {
-    (
-      footerLink.querySelectorAll(":not(h2)") as NodeListOf<HTMLElement>
-    ).forEach((element) => {
+    if (!elements) return;
+    for (const element of elements) {
       element.style.opacity = "0";
       element.style.transform = "translateX(100%)";
-    });
+    }
     footerLinkShadow.style.opacity = "1";
     footerLinkShadow.style.transform = "translateY(0%)";
   };
 
   const leave = () => {
-    (
-      footerLink.querySelectorAll(":not(h2)") as NodeListOf<HTMLElement>
-    ).forEach((element) => {
+    if (!elements) return;
+    for (const element of elements) {
       element.style.opacity = "1";
       element.style.transform = "translateX(0%)";
-    });
+    }
     footerLinkShadow.style.opacity = "0";
     footerLinkShadow.style.transform = "translateY(100%)";
   };
 
   onMount(() => {
+    elements = footerLink.querySelectorAll(
+      ":not(h2)",
+    ) as NodeListOf<HTMLElement>;
     leave();
   });
 </script>
@@ -51,7 +54,7 @@
   footer {
     border-top: 2px solid black;
     background: white;
-    height: 10vh;
+    height: 7.5vh;
     padding: 0 10vw;
     font-weight: 900;
     width: 100%;
@@ -77,7 +80,7 @@
   footer a h2 {
     transition: all 200ms ease;
     position: absolute;
-    font-size: 1.5em;
+    font-size: 1.2em;
     border-bottom: 2px solid black;
   }
 

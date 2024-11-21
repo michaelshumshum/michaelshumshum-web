@@ -6,22 +6,25 @@
   let container: HTMLDivElement;
   let dialog: HTMLDivElement;
 
-  let visible = false;
+  let visible: boolean;
 
   onMount(() => {
-    container.addEventListener("mouseenter", () => {
-      visible = true;
-    });
-    container.addEventListener("mouseleave", () => {
-      visible = false;
-    });
-
+    visible = false;
     const width = dialog.offsetWidth;
     dialog.style.left = `${-width / 2 + container.offsetWidth / 2}px`;
   });
 </script>
 
-<div bind:this={container}>
+<div
+  role="tooltip"
+  bind:this={container}
+  on:mouseenter={() => {
+    visible = true;
+  }}
+  on:mouseleave={() => {
+    visible = false;
+  }}
+>
   <slot></slot>
   <div bind:this={dialog} class={visible ? "visible" : ""}>
     <p>{content}</p>

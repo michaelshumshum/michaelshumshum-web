@@ -33,7 +33,6 @@
 
   loadingSemaphore.subscribe((value) => {
     ready = value === 0;
-    console.log(ready);
   });
 
   onMount(() => {
@@ -56,7 +55,7 @@
     id="landing-header-hero"
     style={`height: ${Math.max(100 - (currentScrollPosition * 100) / window.innerHeight, 10).toFixed(1)}vh`}
   >
-    <Pattern />
+    <Pattern baseText="michaelshumshum" />
     <Logo />
     <code
       style={`opacity:${currentScrollPosition < window.innerHeight * 0.5 ? 1 : 0}.0; transform: translateY(${

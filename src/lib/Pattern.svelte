@@ -9,13 +9,41 @@
   const _font_size = 8;
   const _text_length = 500000;
 
-  const text = "michaelshumshum ".repeat(_text_length / 15);
+  export let baseText: string;
+
   const textures: string[] = [];
   let img: HTMLImageElement;
   let currentTexture = 0;
 
+  function loadTexturesFromCache() {
+    let localStorageItem = window.localStorage.getItem(`pattern_${baseText}_0`);
+    if (localStorageItem) {
+      textures.push(localStorageItem);
+
+      let i = 1;
+      while (true) {
+        localStorageItem = window.localStorage.getItem(
+          `pattern_${baseText}_${i}`,
+        );
+        if (localStorageItem) {
+          textures.push(localStorageItem);
+          i++;
+        } else {
+          break;
+        }
+      }
+
+      return true;
+    }
+    return false; // no textures found in cache
+  }
+
   async function generateTextures() {
-    let text = "michaelshumshum ".repeat(_text_length / 15);
+    // caching the textures to reduce loading on subsequent visits.
+    if (loadTexturesFromCache()) {
+      return;
+    }
+    let text = `${baseText} `.repeat(_text_length / 15);
     const tempCanvas = document.createElement("canvas");
     const tempCtx = tempCanvas.getContext("2d");
     if (!tempCtx) {
@@ -28,7 +56,7 @@
     tempCtx.font = `${_font_size}px monospace`;
     tempCtx.fillStyle = "rgba(0,0,0,0.2)";
 
-    for (let _ = 0; _ < 16; _++) {
+    for (let _ = 0; _ < baseText.length + 1; _++) {
       text = text.slice(1) + text[0];
       tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
 
@@ -39,8 +67,10 @@
         const line = text.slice(i * lineLength, (i + 1) * lineLength);
         tempCtx.fillText(line, 0, (i + 1) * _font_size);
       }
-
-      textures.push(tempCanvas.toDataURL("image/png", 0.2));
+      textures.push(tempCanvas.toDataURL("image/webp", 0.2));
+    }
+    for (let i = 0; i < textures.length; i++) {
+      window.localStorage.setItem(`pattern_${baseText}_${i}`, textures[i]);
     }
   }
   onMount(() => {
@@ -54,7 +84,7 @@
   });
 </script>
 
-<img alt="" src="" bind:this={img} />
+<img alt="" src="" bind:this={img} draggable="false" />
 
 <style>
   img {

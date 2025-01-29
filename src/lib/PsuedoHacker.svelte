@@ -27,7 +27,6 @@
       const line = text.slice(i * lineLength, (i + 1) * lineLength);
       ctx.fillText(line, 0, (i + 1) * _font_size);
     }
-    // ctx.fillText(text, 0, _font_size);
   }
 
   const resizeCanvas = () => {
@@ -43,12 +42,19 @@
     resizeCanvas();
   });
 
+  function animation() {
+    if (element && elementVisible(element)) {
+      text = randomString(_text_length);
+    }
+    setTimeout(() => {
+      requestAnimationFrame(animation);
+    }, 500);
+  }
+
   onMount(() => {
     ctx = canvas.getContext("2d");
     resizeCanvas();
-    setInterval(() => {
-      if (element && elementVisible(element)) text = randomString(_text_length);
-    }, 500);
+    animation();
   });
 </script>
 

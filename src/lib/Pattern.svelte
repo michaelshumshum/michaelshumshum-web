@@ -73,14 +73,21 @@
       window.localStorage.setItem(`pattern_${baseText}_${i}`, textures[i]);
     }
   }
+
+  function animation() {
+    // TODO: when resizing, the image is stretched or shrank, which results in a unintended pattern look
+    // regenerating the textures on windowSize change is a possible solution, but it results in a lag spike as a result of the heavy graphics computation
+    currentTexture = (currentTexture + 1) % textures.length;
+    img.src = textures[currentTexture];
+
+    setTimeout(() => {
+      requestAnimationFrame(animation);
+    }, 75);
+  }
+
   onMount(() => {
     generateTextures().then(decrement);
-    setInterval(() => {
-      // TODO: when resizing, the image is stretched or shrank, which results in a unintended pattern look
-      // regenerating the textures on windowSize change is a possible solution, but it results in a lag spike as a result of the heavy graphics computation
-      currentTexture = (currentTexture + 1) % textures.length;
-      img.src = textures[currentTexture];
-    }, 75);
+    animation();
   });
 </script>
 

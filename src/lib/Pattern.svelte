@@ -16,7 +16,26 @@
   let currentTexture = 0;
 
   function loadTexturesFromCache() {
+    const currentWindowSize = get(windowSize);
+    const lastWindowSize = {
+      width: 0,
+      height: 0,
+    };
+    const _ = window.localStorage.getItem("last_window_size");
+    if (!_) {
+      return false;
+    }
+    lastWindowSize.width = Number.parseInt(_.split(",")[0], 16);
+    lastWindowSize.height = Number.parseInt(_.split(",")[1], 16);
     let localStorageItem = window.localStorage.getItem(`pattern_${baseText}_0`);
+
+    if (
+      currentWindowSize.width !== lastWindowSize.width ||
+      currentWindowSize.height !== lastWindowSize.height
+    ) {
+      return false;
+    }
+
     if (localStorageItem) {
       textures.push(localStorageItem);
 
@@ -72,6 +91,12 @@
     for (let i = 0; i < textures.length; i++) {
       window.localStorage.setItem(`pattern_${baseText}_${i}`, textures[i]);
     }
+
+    // store the current window size
+    window.localStorage.setItem(
+      "last_window_size",
+      `${get(windowSize).width.toString(16)},${get(windowSize).height.toString(16)}`,
+    );
   }
 
   function animation() {

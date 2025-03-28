@@ -58,6 +58,7 @@
     padding: 0 10vw;
     font-weight: 900;
     width: 100%;
+    overflow: hidden;
   }
 
   footer a {

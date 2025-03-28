@@ -65,7 +65,6 @@
 
 <style>
   .pseudo-hacker {
-    border-radius: 2em;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -76,7 +75,6 @@
     margin: 5vh 0;
   }
   .pseudo-hacker > div {
-    border-radius: 2em;
     padding: 5vh;
     background: white;
     height: 100%;

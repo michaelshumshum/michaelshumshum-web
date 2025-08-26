@@ -1,6 +1,6 @@
 <script lang="ts">
-  export let src: string;
-  export let href: string;
+export let src: string;
+export let href: string;
 </script>
 
 <a target={href.includes("mailto:") ? "" : "_blank"} {href}>

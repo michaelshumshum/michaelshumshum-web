@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let src: string;
+export let src: string;
 </script>
 
 <span><img {src} alt={src} draggable={false} /></span>

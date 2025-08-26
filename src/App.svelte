@@ -1,50 +1,49 @@
 <script lang="ts">
-  if (
-    import.meta.env.PROD &&
-    !window.location.href.includes("michael.shumshum.dev")
-  ) {
-    window.location.replace("https://michael.shumshum.dev");
-  }
+if (
+	import.meta.env.PROD &&
+	!window.location.href.includes("michael.shumshum.dev")
+) {
+	window.location.replace("https://michael.shumshum.dev");
+}
 
-  import { onMount } from "svelte";
-  import Footer from "./lib/Footer.svelte";
-  import InlineIcon from "./lib/common/components/InlineIcon.svelte";
-  import Line from "./lib/common/components/Line.svelte";
-  import Logo from "./lib/Logo.svelte";
-  import smoothscroll from "smoothscroll-polyfill"; // scroll-behavior: smooth polyfill for unsupported browsers
+import smoothscroll from "smoothscroll-polyfill"; // scroll-behavior: smooth polyfill for unsupported browsers
+import { onMount } from "svelte";
+import { get } from "svelte/store";
+import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
+import IconLink from "./lib/common/components/IconLink.svelte";
+import InlineIcon from "./lib/common/components/InlineIcon.svelte";
+import Line from "./lib/common/components/Line.svelte";
+import LoadingSplash from "./lib/common/components/LoadingSplash.svelte";
+import { loadingSemaphore, scrollPosition } from "./lib/common/stores";
+import Footer from "./lib/Footer.svelte";
+import Logo from "./lib/Logo.svelte";
+import Pattern from "./lib/Pattern.svelte";
+import PsuedoHacker from "./lib/PsuedoHacker.svelte";
 
-  import { get } from "svelte/store";
-  import { loadingSemaphore, scrollPosition } from "./lib/common/stores";
-  import PsuedoHacker from "./lib/PsuedoHacker.svelte";
-  import Pattern from "./lib/Pattern.svelte";
-  import IconLink from "./lib/common/components/IconLink.svelte";
-  import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
-  import LoadingSplash from "./lib/common/components/LoadingSplash.svelte";
+smoothscroll.polyfill();
 
-  smoothscroll.polyfill();
+let currentScrollPosition = 0;
 
-  let currentScrollPosition = 0;
+scrollPosition.subscribe((value) => {
+	currentScrollPosition = value;
+});
 
-  scrollPosition.subscribe((value) => {
-    currentScrollPosition = value;
-  });
+let ready = false;
 
-  let ready = false;
+loadingSemaphore.subscribe((value) => {
+	ready = value === 0;
+});
 
-  loadingSemaphore.subscribe((value) => {
-    ready = value === 0;
-  });
-
-  onMount(() => {
-    setTimeout(() => {
-      if (get(scrollPosition) === 0) {
-        window.scrollBy({
-          top: window.innerHeight,
-          behavior: "smooth",
-        });
-      }
-    }, 3000);
-  });
+onMount(() => {
+	setTimeout(() => {
+		if (get(scrollPosition) === 0) {
+			window.scrollBy({
+				top: window.innerHeight,
+				behavior: "smooth",
+			});
+		}
+	}, 3000);
+});
 </script>
 
 <main>

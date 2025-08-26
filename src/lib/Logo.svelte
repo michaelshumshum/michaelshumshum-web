@@ -1,38 +1,38 @@
 <script lang="ts">
-  import { onMount, tick } from "svelte";
+import { onMount, tick } from "svelte";
 
-  let keyframesStyles = "<style>";
+let keyframesStyles = "<style>";
 
-  let svg: SVGElement;
-  onMount(() => {
-    const paths: NodeListOf<SVGPathElement> = svg.querySelectorAll(".svg-path");
-    for (const path of paths) {
-      const length = path.getTotalLength().toFixed(2);
-      keyframesStyles += `@keyframes kf-${length.replaceAll(".", "")}{from{stroke-dashoffset:${path.classList.contains("flip") ? "" : "-"}${length}px;}to{stroke-dashoffset:0px;}}`;
-    }
-    keyframesStyles += "</style>";
+let svg: SVGElement;
+onMount(() => {
+	const paths: NodeListOf<SVGPathElement> = svg.querySelectorAll(".svg-path");
+	for (const path of paths) {
+		const length = path.getTotalLength().toFixed(2);
+		keyframesStyles += `@keyframes kf-${length.replaceAll(".", "")}{from{stroke-dashoffset:${path.classList.contains("flip") ? "" : "-"}${length}px;}to{stroke-dashoffset:0px;}}`;
+	}
+	keyframesStyles += "</style>";
 
-    // wait for the animation styles to get added to the DOM before applying to the path elements
-    tick().then(() => {
-      for (const path of paths) {
-        const length = path.getTotalLength().toFixed(2);
-        // stupid hack from https://stackoverflow.com/a/53627545. fixes dot that appears sometimes
-        path.style.strokeDasharray = `${length}px, ${Number.parseFloat(length) + 1}px`;
-        path.style.strokeDashoffset = `${path.classList.contains("flip") ? "" : "-"}${Number.parseFloat(length) + 0.5}px`;
+	// wait for the animation styles to get added to the DOM before applying to the path elements
+	tick().then(() => {
+		for (const path of paths) {
+			const length = path.getTotalLength().toFixed(2);
+			// stupid hack from https://stackoverflow.com/a/53627545. fixes dot that appears sometimes
+			path.style.strokeDasharray = `${length}px, ${Number.parseFloat(length) + 1}px`;
+			path.style.strokeDashoffset = `${path.classList.contains("flip") ? "" : "-"}${Number.parseFloat(length) + 0.5}px`;
 
-        path.style.animationName = `kf-${length.replaceAll(".", "")}`;
-        path.style.animationTimingFunction = "ease";
-        path.style.animationFillMode = "forwards";
-        if (path.classList.contains("second-stage")) {
-          path.style.animationDelay = "1150ms";
-          path.style.animationDuration = "350ms";
-        } else {
-          path.style.animationDuration = "1s";
-          path.style.animationDelay = "400ms";
-        }
-      }
-    });
-  });
+			path.style.animationName = `kf-${length.replaceAll(".", "")}`;
+			path.style.animationTimingFunction = "ease";
+			path.style.animationFillMode = "forwards";
+			if (path.classList.contains("second-stage")) {
+				path.style.animationDelay = "1150ms";
+				path.style.animationDuration = "350ms";
+			} else {
+				path.style.animationDuration = "1s";
+				path.style.animationDelay = "400ms";
+			}
+		}
+	});
+});
 </script>
 
 <svelte:head>

@@ -1,20 +1,18 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+export let content: string;
 
-  export let content: string;
+let visible = false;
 
-  let visible = false;
+const enter = () => {
+	visible = true;
+};
+
+const leave = () => {
+	visible = false;
+};
 </script>
 
-<div
-  role="tooltip"
-  on:mouseenter={() => {
-    visible = true;
-  }}
-  on:mouseleave={() => {
-    visible = false;
-  }}
->
+<div role="tooltip" on:mouseenter={enter} on:mouseleave={leave}>
   <slot></slot>
   <div class={visible ? "visible" : ""}>
     <p>{content}</p>

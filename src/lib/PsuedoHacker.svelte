@@ -1,61 +1,60 @@
 <script lang="ts">
-  import { scrollPosition, windowSize } from "./common/stores";
-  import { randomString } from "./common/utils";
-  import { onMount } from "svelte";
-  import { elementVisible } from "./common/utils";
+import { onMount } from "svelte";
+import { scrollPosition, windowSize } from "./common/stores";
+import { elementVisible, randomString } from "./common/utils";
 
-  /**
-   * How much "hacker text" to generate
-   */
-  const _text_length = 50000;
-  const _font_size = 36;
-  let ctx: CanvasRenderingContext2D | null = null;
+/**
+ * How much "hacker text" to generate
+ */
+const _text_length = 50000;
+const _font_size = 36;
+let ctx: CanvasRenderingContext2D | null = null;
 
-  let element: HTMLDivElement;
-  let canvas: HTMLCanvasElement;
+let element: HTMLDivElement;
+let canvas: HTMLCanvasElement;
 
-  let text = randomString(_text_length);
-  $: if (text && ctx) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = `${_font_size}px monospace`;
-    ctx.fillStyle = "black";
+let text = randomString(_text_length);
+$: if (text && ctx) {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.font = `${_font_size}px monospace`;
+	ctx.fillStyle = "black";
 
-    const necessaryLines = Math.ceil(canvas.height / _font_size);
-    const lineLength = Math.ceil(_text_length / necessaryLines);
+	const necessaryLines = Math.ceil(canvas.height / _font_size);
+	const lineLength = Math.ceil(_text_length / necessaryLines);
 
-    for (let i = 0; i < necessaryLines; i++) {
-      const line = text.slice(i * lineLength, (i + 1) * lineLength);
-      ctx.fillText(line, 0, (i + 1) * _font_size);
-    }
-  }
+	for (let i = 0; i < necessaryLines; i++) {
+		const line = text.slice(i * lineLength, (i + 1) * lineLength);
+		ctx.fillText(line, 0, (i + 1) * _font_size);
+	}
+}
 
-  const resizeCanvas = () => {
-    if (element && canvas) {
-      canvas.width = element.clientWidth * window.devicePixelRatio;
-      canvas.height = element.clientHeight * window.devicePixelRatio;
-      canvas.style.width = `${element.clientWidth}px`;
-      canvas.style.height = `${element.clientHeight}px`;
-    }
-  };
+const resizeCanvas = () => {
+	if (element && canvas) {
+		canvas.width = element.clientWidth * window.devicePixelRatio;
+		canvas.height = element.clientHeight * window.devicePixelRatio;
+		canvas.style.width = `${element.clientWidth}px`;
+		canvas.style.height = `${element.clientHeight}px`;
+	}
+};
 
-  windowSize.subscribe(() => {
-    resizeCanvas();
-  });
+windowSize.subscribe(() => {
+	resizeCanvas();
+});
 
-  function animation() {
-    if (element && elementVisible(element)) {
-      text = randomString(_text_length);
-    }
-    setTimeout(() => {
-      requestAnimationFrame(animation);
-    }, 500);
-  }
+function animation() {
+	if (element && elementVisible(element)) {
+		text = randomString(_text_length);
+	}
+	setTimeout(() => {
+		requestAnimationFrame(animation);
+	}, 500);
+}
 
-  onMount(() => {
-    ctx = canvas.getContext("2d");
-    resizeCanvas();
-    animation();
-  });
+onMount(() => {
+	ctx = canvas.getContext("2d");
+	resizeCanvas();
+	animation();
+});
 </script>
 
 <div bind:this={element} class="pseudo-hacker">

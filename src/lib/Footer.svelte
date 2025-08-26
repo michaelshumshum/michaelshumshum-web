@@ -1,37 +1,35 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+import { onMount } from "svelte";
 
-  let footerLink: HTMLAnchorElement;
-  let footerLinkShadow: HTMLHeadingElement;
+let footerLink: HTMLAnchorElement;
+let footerLinkShadow: HTMLHeadingElement;
 
-  let elements: NodeListOf<HTMLElement> | null = null;
+let elements: NodeListOf<HTMLElement> | null = null;
 
-  const enter = () => {
-    if (!elements) return;
-    for (const element of elements) {
-      element.style.opacity = "0";
-      element.style.transform = "translateX(100%)";
-    }
-    footerLinkShadow.style.opacity = "1";
-    footerLinkShadow.style.transform = "translateY(0%)";
-  };
+const enter = () => {
+	if (!elements) return;
+	for (const element of elements) {
+		element.style.opacity = "0";
+		element.style.transform = "translateX(100%)";
+	}
+	footerLinkShadow.style.opacity = "1";
+	footerLinkShadow.style.transform = "translateY(0%)";
+};
 
-  const leave = () => {
-    if (!elements) return;
-    for (const element of elements) {
-      element.style.opacity = "1";
-      element.style.transform = "translateX(0%)";
-    }
-    footerLinkShadow.style.opacity = "0";
-    footerLinkShadow.style.transform = "translateY(100%)";
-  };
+const leave = () => {
+	if (!elements) return;
+	for (const element of elements) {
+		element.style.opacity = "1";
+		element.style.transform = "translateX(0%)";
+	}
+	footerLinkShadow.style.opacity = "0";
+	footerLinkShadow.style.transform = "translateY(100%)";
+};
 
-  onMount(() => {
-    elements = footerLink.querySelectorAll(
-      ":not(h2)",
-    ) as NodeListOf<HTMLElement>;
-    leave();
-  });
+onMount(() => {
+	elements = footerLink.querySelectorAll(":not(h2)") as NodeListOf<HTMLElement>;
+	leave();
+});
 </script>
 
 <footer>

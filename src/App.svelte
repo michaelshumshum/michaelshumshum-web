@@ -11,7 +11,6 @@ import { onMount } from "svelte";
 import { get } from "svelte/store";
 import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
 import IconLink from "./lib/common/components/IconLink.svelte";
-import InlineIcon from "./lib/common/components/InlineIcon.svelte";
 import Line from "./lib/common/components/Line.svelte";
 import LoadingSplash from "./lib/common/components/LoadingSplash.svelte";
 import { loadingSemaphore, scrollPosition } from "./lib/common/stores";

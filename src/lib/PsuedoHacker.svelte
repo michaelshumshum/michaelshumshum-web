@@ -1,6 +1,6 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import { scrollPosition, windowSize } from "./common/stores";
+import { windowSize } from "./common/stores";
 import { elementVisible, randomString } from "./common/utils";
 
 /**

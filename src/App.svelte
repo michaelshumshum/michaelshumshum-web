@@ -70,6 +70,10 @@
         <Line />
         <div class="experience-entry">
           <h4>Software Engineer Intern – Bowtie Life Insurance Hong Kong</h4>
+          <h5>May 2025 - August 2025</h5>
+        </div>
+        <div class="experience-entry">
+          <h4>Software Engineer Intern – Bowtie Life Insurance Hong Kong</h4>
           <h5>June 2024 - August 2024</h5>
         </div>
         <div class="experience-entry">

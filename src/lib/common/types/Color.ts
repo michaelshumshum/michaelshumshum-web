@@ -3,3 +3,5 @@ type RGBA = `rgba(${number}, ${number}, ${number}, ${number})`;
 type HEX = `#${string}`;
 
 type Color = RGB | RGBA | HEX;
+
+export type { Color };

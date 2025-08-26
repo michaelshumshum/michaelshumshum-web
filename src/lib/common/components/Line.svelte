@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Color } from "../types/Color";
 /**
  * @param [thickness=2] Thickness of line in pixels
  */

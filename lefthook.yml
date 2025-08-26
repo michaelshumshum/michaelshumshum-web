@@ -1,4 +1,4 @@
 pre-commit:
   commands:
     check:
-      run: npm check
+      run: npm run check

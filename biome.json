@@ -1,4 +1,10 @@
 {
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 1
+	},
 	"overrides": [
 		{
 			"includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],

@@ -67,6 +67,10 @@ onMount(() => {
         <h2>Experience</h2>
         <Line />
         <div class="experience-entry">
+          <h4>Software Engineer – Bowtie Life Insurance Hong Kong</h4>
+          <h5>January 2026 - PRESENT</h5>
+        </div>
+        <div class="experience-entry">
           <h4>Software Engineer Intern – Bowtie Life Insurance Hong Kong</h4>
           <h5>May 2025 - August 2025</h5>
         </div>
@@ -87,7 +91,7 @@ onMount(() => {
           <h4>
             Bachelor of Science in Computer Science – Arizona State University
           </h4>
-          <h5>August 2022 - December 2025 (PRESENT)</h5>
+          <h5>August 2022 - December 2025</h5>
         </div>
         <div class="education-entry">
           <h4>High School Diploma – Hong Kong International School</h4>

@@ -18,6 +18,7 @@ import Footer from "./lib/Footer.svelte";
 import Logo from "./lib/Logo.svelte";
 import Pattern from "./lib/Pattern.svelte";
 import PsuedoHacker from "./lib/PsuedoHacker.svelte";
+import TimelineEntry from "./lib/TimelineEntry.svelte";
 
 smoothscroll.polyfill();
 
@@ -66,39 +67,39 @@ onMount(() => {
       <div id="experience-box">
         <h2>Experience</h2>
         <Line />
-        <div class="experience-entry">
+        <TimelineEntry>
           <h4>Software Engineer – Bowtie Life Insurance Hong Kong</h4>
           <h5>January 2026 - PRESENT</h5>
-        </div>
-        <div class="experience-entry">
+        </TimelineEntry>
+        <TimelineEntry>
           <h4>Software Engineer Intern – Bowtie Life Insurance Hong Kong</h4>
           <h5>May 2025 - August 2025</h5>
-        </div>
-        <div class="experience-entry">
+        </TimelineEntry>
+        <TimelineEntry>
           <h4>Software Engineer Intern – Bowtie Life Insurance Hong Kong</h4>
           <h5>June 2024 - August 2024</h5>
-        </div>
-        <div class="experience-entry">
+        </TimelineEntry>
+        <TimelineEntry>
           <h4>IT Technical Intern – iCHEF Hong Kong</h4>
           <h5>June 2023 - August 2023</h5>
-        </div>
+        </TimelineEntry>
       </div>
       <br />
       <div id="education-box">
         <h2>Education</h2>
         <Line />
-        <div class="education-entry">
+        <TimelineEntry>
           <h4>
             Bachelor of Science in Computer Science – Arizona State University
           </h4>
           <h5>August 2022 - December 2025</h5>
-        </div>
-        <div class="education-entry">
+        </TimelineEntry>
+        <TimelineEntry>
           <h4>High School Diploma – Hong Kong International School</h4>
           <h5>August 2019 - May 2022</h5>
-        </div>
-      </div></PsuedoHacker
-    >
+        </TimelineEntry>
+      </div>
+    </PsuedoHacker>
     <div id="personal-section">
       <div id="about-me">
         <h1>About Me</h1>
@@ -178,31 +179,6 @@ onMount(() => {
     flex-direction: column;
     gap: 1em;
     align-items: start;
-  }
-
-  .experience-entry,
-  .education-entry {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 1em;
-    padding: 1em 0 1em 1em;
-    margin-left: 1em;
-    border-left: 2px solid black;
-    position: relative;
-  }
-
-  .experience-entry::before,
-  .education-entry::before {
-    content: "";
-    display: block;
-    background: black;
-    border-radius: 100%;
-    width: 6px;
-    height: 6px;
-    position: absolute;
-    left: -4px;
-    top: -4px;
   }
 
   #personal-section {

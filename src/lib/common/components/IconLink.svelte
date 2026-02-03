@@ -1,6 +1,5 @@
 <script lang="ts">
-export let src: string;
-export let href: string;
+let { src, href }: { src: string; href: string } = $props();
 </script>
 
 <a target={href.includes("mailto:") ? "" : "_blank"} {href}>

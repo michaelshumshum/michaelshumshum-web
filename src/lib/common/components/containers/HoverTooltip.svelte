@@ -1,7 +1,9 @@
 <script lang="ts">
-export let content: string;
+import type { Snippet } from "svelte";
 
-let visible = false;
+let { content, children }: { content: string; children: Snippet } = $props();
+
+let visible = $state(false);
 
 const enter = () => {
 	visible = true;
@@ -12,8 +14,8 @@ const leave = () => {
 };
 </script>
 
-<div role="tooltip" on:mouseenter={enter} on:mouseleave={leave}>
-  <slot></slot>
+<div role="tooltip" onmouseenter={enter} onmouseleave={leave}>
+  {@render children()}
   <div class={visible ? "visible" : ""}>
     <p>{content}</p>
   </div>

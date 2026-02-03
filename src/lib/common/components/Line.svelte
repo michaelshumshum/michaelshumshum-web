@@ -1,14 +1,17 @@
 <script lang="ts">
 import type { Color } from "../types/Color";
-/**
- * @param [thickness=2] Thickness of line in pixels
- */
-export const thickness: number = 2;
 
 /**
+ * @param [thickness=2] Thickness of line in pixels
+ *
  * @param [color="#000000"] Color of line
  */
-export const color: Color = "#000000";
+interface LineProps {
+	thickness?: number;
+	color?: Color;
+}
+
+let { thickness = 2, color = "#000000" }: LineProps = $props();
 </script>
 
 <div class="line" style={`height:${thickness}px; background:${color}`}></div>

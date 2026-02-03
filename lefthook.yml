@@ -1,8 +1,6 @@
 pre-commit:
   commands:
-    check:
-      run: npm run check
-      stage_fixed: true
     format:
-      run: npm run format
+      glob: "*.{js,ts,tsx,json,css,md,svelte,html}"
+      run: npx @biomejs/biome check --write --colors=off .
       stage_fixed: true

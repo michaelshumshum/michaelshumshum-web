@@ -8,7 +8,7 @@ const decrement = incrementLoadingSemaphore();
 const _font_size = 8;
 const _text_length = 500;
 
-export let baseText: string;
+let { baseText }: { baseText: string } = $props();
 
 const texts: string[] = [];
 let canvas: HTMLCanvasElement;
@@ -62,7 +62,7 @@ onMount(() => {
 });
 </script>
 
-<canvas bind:this={canvas} />
+<canvas bind:this={canvas}></canvas>
 
 <style>
   canvas {

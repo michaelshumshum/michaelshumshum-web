@@ -1,5 +1,5 @@
 <script lang="ts">
-export let src: string;
+let { src }: { src: string } = $props();
 </script>
 
 <span><img {src} alt={src} draggable={false} /></span>

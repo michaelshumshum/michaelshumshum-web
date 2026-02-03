@@ -10,6 +10,7 @@ import smoothscroll from "smoothscroll-polyfill"; // scroll-behavior: smooth pol
 import { onMount } from "svelte";
 import { get } from "svelte/store";
 import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
+import DownloadLink from "./lib/common/components/DownloadLink.svelte";
 import IconLink from "./lib/common/components/IconLink.svelte";
 import Line from "./lib/common/components/Line.svelte";
 import LoadingSplash from "./lib/common/components/LoadingSplash.svelte";
@@ -105,6 +106,10 @@ onMount(() => {
         <h1>About Me</h1>
         <Line />
         <p>skateboarding, computer science, eating good food</p>
+        <DownloadLink
+          href="https://files.shumshum.dev/resume_20260203.pdf"
+          label="my resume"
+        />
       </div>
       <div id="contact-box">
         <h1>Contact Me</h1>
@@ -191,6 +196,7 @@ onMount(() => {
   #personal-section > div {
     display: flex;
     flex-direction: column;
+    align-items: start;
     gap: 1em;
     margin-top: 1em;
   }

@@ -25,3 +25,12 @@ h4 {
 h5 {
 	font-style: italic;
 }
+
+a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+a:visited {
+    color: inherit;
+}

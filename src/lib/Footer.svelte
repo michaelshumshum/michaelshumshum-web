@@ -60,9 +60,8 @@ onMount(() => {
   }
 
   footer a {
-    display: block;
-    position: relative;
     display: flex;
+    position: relative;
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;

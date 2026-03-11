@@ -157,11 +157,9 @@ onMount(() => {
   #landing-header-hero {
     z-index: 1000;
     background: white;
-    position: relative;
-    top: 0;
-    background: white;
-    border-bottom: 2px solid black;
     position: fixed;
+    top: 0;
+    border-bottom: 2px solid black;
     width: 100vw;
     display: flex;
     flex-direction: column;

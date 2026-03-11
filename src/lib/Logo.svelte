@@ -43,6 +43,8 @@ onMount(() => {
   bind:this={svg}
   xmlns="http://www.w3.org/2000/svg"
   viewBox="-5 -15 1350 600"
+  role="img"
+  aria-label="michaelshumshum logo"
 >
   <path
     class="svg-path"

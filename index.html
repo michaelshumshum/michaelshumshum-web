@@ -24,14 +24,14 @@
           h = d.documentElement,
           t = setTimeout(() => {
             h.className =
-              h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+              `${h.className.replace(/\bwf-loading\b/g, "")} wf-inactive`;
           }, config.scriptTimeout),
           tk = d.createElement("script"),
           f = false,
           s = d.getElementsByTagName("script")[0],
           a;
         h.className += " wf-loading";
-        tk.src = "https://use.typekit.net/" + config.kitId + ".js";
+        tk.src = `https://use.typekit.net/${config.kitId}.js`;
         tk.async = true;
         tk.onload = tk.onreadystatechange = function () {
           a = this.readyState;
@@ -40,7 +40,7 @@
           clearTimeout(t);
           try {
             Typekit.load(config);
-          } catch (e) {}
+          } catch (_e) {}
         };
         s.parentNode.insertBefore(tk, s);
       })(document);

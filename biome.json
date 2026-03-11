@@ -8,22 +8,5 @@
 		"indentStyle": "tab",
 		"indentWidth": 2,
 		"includes": ["**/*.svelte", "**/*.ts", "**/*.js", "**/*.json"]
-	},
-	"overrides": [
-		{
-			"includes": ["**/*.svelte"],
-			"linter": {
-				"rules": {
-					"style": {
-						"useConst": "off",
-						"useImportType": "off"
-					},
-					"correctness": {
-						"noUnusedVariables": "off",
-						"noUnusedImports": "off"
-					}
-				}
-			}
-		}
-	]
+	}
 }

@@ -11,12 +11,6 @@ importers:
       '@biomejs/biome':
         specifier: ^2.4.6
         version: 2.4.6
-      '@types/smoothscroll-polyfill':
-        specifier: ^0.3.4
-        version: 0.3.4
-      smoothscroll-polyfill:
-        specifier: ^0.4.4
-        version: 0.4.4
     devDependencies:
       '@commitlint/cli':
         specifier: ^20.5.0
@@ -558,9 +552,6 @@ packages:
   '@types/pug@2.0.10':
     resolution: {integrity: sha512-Sk/uYFOBAB7mb74XcpizmH0KOR2Pv3D2Hmrh1Dmy5BmK3MpdSa5kqZcg6EKBdklU0bFXX9gCfzvpnyUehrPIuA==}
 
-  '@types/smoothscroll-polyfill@0.3.4':
-    resolution: {integrity: sha512-w1krF+TJh7Azz/2/bEN1tmyKoNt3B6bLCn6SfJErzhKAr1w1b06ePx79NXA+3lTw+DbqXN12nk/Ce1UQDVY8yA==}
-
   '@types/trusted-types@2.0.7':
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
 
@@ -1024,9 +1015,6 @@ packages:
     resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
     engines: {node: '>=10'}
     hasBin: true
-
-  smoothscroll-polyfill@0.4.4:
-    resolution: {integrity: sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==}
 
   sorcery@0.11.1:
     resolution: {integrity: sha512-o7npfeJE6wi6J9l0/5LKshFzZ2rMatRiCDwYeDQaOzqdzRJwALhX7mk/A/ecg6wjMu7wdZbmXfD2S/vpOg0bdQ==}
@@ -1571,8 +1559,6 @@ snapshots:
 
   '@types/pug@2.0.10': {}
 
-  '@types/smoothscroll-polyfill@0.3.4': {}
-
   '@types/trusted-types@2.0.7': {}
 
   acorn@8.16.0: {}
@@ -2010,8 +1996,6 @@ snapshots:
       rimraf: 2.7.1
 
   semver@7.7.4: {}
-
-  smoothscroll-polyfill@0.4.4: {}
 
   sorcery@0.11.1:
     dependencies:

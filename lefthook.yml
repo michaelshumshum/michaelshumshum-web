@@ -7,5 +7,5 @@ pre-commit:
   commands:
     format:
       glob: "*.{js,ts,tsx,json,css,md,svelte,html}"
-      run: yes | biome check --write --colors=off .
+      run: yes | biome check --write --colors=off {staged_files}
       stage_fixed: true

@@ -6,7 +6,7 @@ if (
 	window.location.replace("https://michael.shumshum.dev");
 }
 
-import smoothscroll from "smoothscroll-polyfill"; // scroll-behavior: smooth polyfill for unsupported browsers
+
 import { onMount } from "svelte";
 import { get } from "svelte/store";
 import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
@@ -21,7 +21,7 @@ import Pattern from "./lib/Pattern.svelte";
 import PsuedoHacker from "./lib/PsuedoHacker.svelte";
 import TimelineEntry from "./lib/TimelineEntry.svelte";
 
-smoothscroll.polyfill();
+
 
 let currentScrollPosition = 0;
 

@@ -23,8 +23,6 @@
 		"vite": "^7.3.2"
 	},
 	"dependencies": {
-		"@biomejs/biome": "^2.4.6",
-		"@types/smoothscroll-polyfill": "^0.3.4",
-		"smoothscroll-polyfill": "^0.4.4"
+		"@biomejs/biome": "^2.4.6"
 	}
 }

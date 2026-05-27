@@ -107,7 +107,7 @@ onMount(() => {
         <Line />
         <p>skateboarding, computer science, eating good food</p>
         <DownloadLink
-          href="https://files.shumshum.dev/resume_20260203.pdf"
+          href="https://files.shumshum.dev/resume_20260528.pdf"
           label="my resume"
         />
       </div>

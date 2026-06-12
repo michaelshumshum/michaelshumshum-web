@@ -18,8 +18,8 @@ importers:
         specifier: ^20.5.3
         version: 20.5.3
       '@iconify/svelte':
-        specifier: ^5.2.1
-        version: 5.2.1(svelte@5.55.10)
+        specifier: ^5.2.2
+        version: 5.2.2(svelte@5.55.10)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.1.2
         version: 7.1.2(svelte@5.55.10)(vite@8.0.16(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1))
@@ -354,8 +354,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@iconify/svelte@5.2.1':
-    resolution: {integrity: sha512-zHmsIPmnIhGd5gc95bNN5FL+GifwMZv7M2rlZEpa7IXYGFJm/XGHdWf6PWQa6OBoC+R69WyiPO9NAj5wjfjbow==}
+  '@iconify/svelte@5.2.2':
+    resolution: {integrity: sha512-XMXxD3nzH7yB68C3K4sNwzrJ1TBscODR0ZqCeNf0KGuEMCTSuCo0jHNDZ0o0iRXTylO41NSz/DWam/4atLG1yw==}
     peerDependencies:
       svelte: '>5.0.0'
 
@@ -1302,7 +1302,7 @@ snapshots:
   '@esbuild/win32-x64@0.27.7':
     optional: true
 
-  '@iconify/svelte@5.2.1(svelte@5.55.10)':
+  '@iconify/svelte@5.2.2(svelte@5.55.10)':
     dependencies:
       '@iconify/types': 2.0.0
       svelte: 5.55.10

@@ -12,7 +12,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^20.5.3",
 		"@commitlint/config-conventional": "^20.5.3",
-		"@iconify/svelte": "^5.2.1",
+		"@iconify/svelte": "^5.2.2",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
 		"@tsconfig/svelte": "^5.0.8",
 		"lefthook": "^1.13.6",

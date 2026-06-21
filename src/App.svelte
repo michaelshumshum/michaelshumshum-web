@@ -9,6 +9,7 @@ if (
 
 import { onMount } from "svelte";
 import { get } from "svelte/store";
+import BackdropWrapper from "./lib/BackdropWrapper.svelte";
 import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
 import DownloadLink from "./lib/common/components/DownloadLink.svelte";
 import IconLink from "./lib/common/components/IconLink.svelte";
@@ -17,8 +18,8 @@ import LoadingSplash from "./lib/common/components/LoadingSplash.svelte";
 import { loadingSemaphore, scrollPosition } from "./lib/common/stores";
 import Footer from "./lib/Footer.svelte";
 import Logo from "./lib/Logo.svelte";
+import MatrixCanvas from "./lib/MatrixCanvas.svelte";
 import Pattern from "./lib/Pattern.svelte";
-import PsuedoHacker from "./lib/PsuedoHacker.svelte";
 import TimelineEntry from "./lib/TimelineEntry.svelte";
 
 
@@ -64,7 +65,8 @@ onMount(() => {
     >
   </div>
   <div id="main-content">
-    <PsuedoHacker>
+    <BackdropWrapper>
+      {#snippet background()}<MatrixCanvas />{/snippet}
       <div id="experience-box">
         <h2>Experience</h2>
         <Line />
@@ -100,7 +102,7 @@ onMount(() => {
           <h5>August 2019 - May 2022</h5>
         </TimelineEntry>
       </div>
-    </PsuedoHacker>
+    </BackdropWrapper>
     <div id="personal-section">
       <div id="about-me">
         <h1>About Me</h1>

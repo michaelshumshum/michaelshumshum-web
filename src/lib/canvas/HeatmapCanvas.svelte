@@ -1,7 +1,7 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import { windowSize } from "./common/stores";
-import { elementVisible } from "./common/utils";
+import { windowSize } from "../stores";
+import { elementVisible } from "../utils";
 
 // Grid resolution in logical pixels — smaller = smoother contours, heavier CPU
 const CELL_SIZE = 4;

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import { windowSize } from "./common/stores";
-import { incrementLoadingSemaphore } from "./common/utils";
+import { windowSize } from "../stores";
+import { incrementLoadingSemaphore } from "../utils";
 
 const decrement = incrementLoadingSemaphore();
 

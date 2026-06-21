@@ -9,18 +9,18 @@ if (
 
 import { onMount } from "svelte";
 import { get } from "svelte/store";
-import BackdropWrapper from "./lib/BackdropWrapper.svelte";
-import HoverTooltip from "./lib/common/components/containers/HoverTooltip.svelte";
-import DownloadLink from "./lib/common/components/DownloadLink.svelte";
-import IconLink from "./lib/common/components/IconLink.svelte";
-import Line from "./lib/common/components/Line.svelte";
-import LoadingSplash from "./lib/common/components/LoadingSplash.svelte";
-import { loadingSemaphore, scrollPosition } from "./lib/common/stores";
-import Footer from "./lib/Footer.svelte";
-import HeatmapCanvas from "./lib/HeatmapCanvas.svelte";
-import HeroHeader from "./lib/HeroHeader.svelte";
-import MatrixCanvas from "./lib/MatrixCanvas.svelte";
-import TimelineEntry from "./lib/TimelineEntry.svelte";
+import HeatmapCanvas from "./lib/canvas/HeatmapCanvas.svelte";
+import MatrixCanvas from "./lib/canvas/MatrixCanvas.svelte";
+import BackdropWrapper from "./lib/sections/BackdropWrapper.svelte";
+import Footer from "./lib/sections/Footer.svelte";
+import HeroHeader from "./lib/sections/HeroHeader.svelte";
+import { loadingSemaphore, scrollPosition } from "./lib/stores";
+import DownloadLink from "./lib/ui/DownloadLink.svelte";
+import HoverTooltip from "./lib/ui/HoverTooltip.svelte";
+import IconLink from "./lib/ui/IconLink.svelte";
+import Line from "./lib/ui/Line.svelte";
+import LoadingSplash from "./lib/ui/LoadingSplash.svelte";
+import TimelineEntry from "./lib/ui/TimelineEntry.svelte";
 
 
 

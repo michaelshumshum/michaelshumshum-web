@@ -1,7 +1,7 @@
 <script lang="ts">
-import { scrollPosition } from "./common/stores";
-import Logo from "./Logo.svelte";
-import Pattern from "./Pattern.svelte";
+import Pattern from "../canvas/Pattern.svelte";
+import { scrollPosition } from "../stores";
+import Logo from "../ui/Logo.svelte";
 
 let currentScrollPosition = 0;
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import { windowSize } from "./common/stores";
-import { elementVisible, randomString } from "./common/utils";
+import { windowSize } from "../stores";
+import { elementVisible, randomString } from "../utils";
 
 const _text_length = 50000;
 const _font_size = 36;

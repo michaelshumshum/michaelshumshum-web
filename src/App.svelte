@@ -17,18 +17,12 @@ import Line from "./lib/common/components/Line.svelte";
 import LoadingSplash from "./lib/common/components/LoadingSplash.svelte";
 import { loadingSemaphore, scrollPosition } from "./lib/common/stores";
 import Footer from "./lib/Footer.svelte";
-import Logo from "./lib/Logo.svelte";
+import HeatmapCanvas from "./lib/HeatmapCanvas.svelte";
+import HeroHeader from "./lib/HeroHeader.svelte";
 import MatrixCanvas from "./lib/MatrixCanvas.svelte";
-import Pattern from "./lib/Pattern.svelte";
 import TimelineEntry from "./lib/TimelineEntry.svelte";
 
 
-
-let currentScrollPosition = 0;
-
-scrollPosition.subscribe((value) => {
-	currentScrollPosition = value;
-});
 
 let ready = false;
 
@@ -52,18 +46,7 @@ onMount(() => {
   {#if !ready}
     <LoadingSplash />
   {/if}
-  <div
-    id="landing-header-hero"
-    style={`height: ${Math.max(100 - (currentScrollPosition * 100) / window.innerHeight, 10).toFixed(1)}vh`}
-  >
-    <Pattern baseText="michaelshumshum" />
-    <Logo />
-    <code
-      style={`opacity:${currentScrollPosition < window.innerHeight * 0.5 ? 1 : 0}.0; transform: translateY(${
-        currentScrollPosition < window.innerHeight * 0.5 ? 0 : 100
-      }%); `}>building, compiling, squashing</code
-    >
-  </div>
+  <HeroHeader />
   <div id="main-content">
     <BackdropWrapper>
       {#snippet background()}<MatrixCanvas />{/snippet}
@@ -103,80 +86,57 @@ onMount(() => {
         </TimelineEntry>
       </div>
     </BackdropWrapper>
-    <div id="personal-section">
-      <div id="about-me">
-        <h1>About Me</h1>
-        <Line />
-        <p>skateboarding, computer science, eating good food</p>
-        <DownloadLink
-          href="https://files.shumshum.dev/resume_20260528.pdf"
-          label="my resume"
-        />
-      </div>
-      <div id="contact-box">
-        <h1>Contact Me</h1>
-        <Line />
-        <div class="social-links">
-          <!-- this email icon looks terrible imo and doesn't fit aesthetically-->
-          <HoverTooltip content="michael@shumshum.dev">
-            <IconLink
-              href="mailto:michael@shumshum.dev"
-              src="social-icons/email.svg"
-            />
-          </HoverTooltip>
-          <HoverTooltip content="GitHub">
-            <IconLink
-              href="https://www.github.com/michaelshumshum"
-              src="social-icons/github.svg"
-            />
-          </HoverTooltip>
-          <HoverTooltip content="LinkedIn">
-            <IconLink
-              href="https://www.linkedin.com/in/michaelshumshum"
-              src="social-icons/linkedin.svg"
-            />
-          </HoverTooltip>
-          <HoverTooltip content="Instagram">
-            <IconLink
-              href="https://www.instagram.com/michael.shumshum"
-              src="social-icons/instagram.svg"
-            />
-          </HoverTooltip>
+    <BackdropWrapper>
+      {#snippet background()}<HeatmapCanvas />{/snippet}
+      <div id="personal-section">
+        <div id="about-me">
+          <h1>About Me</h1>
+          <Line />
+          <p>software engineering by day, skateboarding religiously, taking food way too seriously</p>
+          <DownloadLink
+            href="https://files.shumshum.dev/resume_20260528.pdf"
+            label="my resume"
+          />
+        </div>
+        <div id="contact-box">
+          <h1>Find Me</h1>
+          <Line />
+          <div class="social-links">
+            <!-- this email icon looks terrible imo and doesn't fit aesthetically-->
+            <HoverTooltip content="michael@shumshum.dev">
+              <IconLink
+                href="mailto:michael@shumshum.dev"
+                src="social-icons/email.svg"
+              />
+            </HoverTooltip>
+            <HoverTooltip content="GitHub">
+              <IconLink
+                href="https://www.github.com/michaelshumshum"
+                src="social-icons/github.svg"
+              />
+            </HoverTooltip>
+            <HoverTooltip content="LinkedIn">
+              <IconLink
+                href="https://www.linkedin.com/in/michaelshumshum"
+                src="social-icons/linkedin.svg"
+              />
+            </HoverTooltip>
+            <HoverTooltip content="Instagram">
+              <IconLink
+                href="https://www.instagram.com/michael.shumshum"
+                src="social-icons/instagram.svg"
+              />
+            </HoverTooltip>
+          </div>
         </div>
       </div>
-    </div>
+    </BackdropWrapper>
   </div>
   <Footer />
 </main>
 
 <style>
   @import "app.css";
-
-  code {
-    font-family: monospace;
-    text-align: center;
-  }
-  #landing-header-hero {
-    z-index: 1000;
-    background: white;
-    position: fixed;
-    top: 0;
-    border-bottom: 2px solid black;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0 5vw;
-    overflow: hidden;
-  }
-
-  #landing-header-hero code {
-    position: absolute;
-    transition: all 250ms ease;
-    bottom: 25%;
-    font-size: 1.5em;
-  }
 
   #experience-box,
   #education-box {
@@ -216,6 +176,11 @@ onMount(() => {
     margin-top: 100vh;
     min-height: 90vh;
   }
+
+    p {
+        font-size: 1.1em;
+        line-height: 1.5em;
+    }
 
   @media (max-width: 800px) {
     h1 {

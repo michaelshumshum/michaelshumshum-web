@@ -76,10 +76,11 @@
   .timeline-entry.expandable {
     cursor: pointer;
     user-select: none;
+    transition: padding-left 0.2s ease;
   }
 
-  .timeline-entry.expandable:hover :global(h4) {
-    text-decoration: underline;
+  .timeline-entry.expandable:hover {
+    padding-left: 1.5em;
   }
 
   .timeline-header {

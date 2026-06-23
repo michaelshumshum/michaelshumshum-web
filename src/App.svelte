@@ -56,18 +56,37 @@ onMount(() => {
         <TimelineEntry>
           <h4>Software Engineer – Bowtie Life Insurance Hong Kong</h4>
           <h5>January 2026 - PRESENT</h5>
+          {#snippet details()}
+            <p>Full-time at a digital insurance startup in HK. Building B2B products and shipping LLM tooling to improve how the team and customers interact with the platform.</p>
+          {/snippet}
         </TimelineEntry>
         <TimelineEntry>
           <h4>Software Engineer Intern – Bowtie Life Insurance Hong Kong</h4>
           <h5>May 2025 - August 2025</h5>
+          {#snippet details()}
+            <p>Second internship, went deeper into the full stack. Built insurance automation features in Django and React, then led a big refactor across the codebase.</p>
+          {/snippet}
         </TimelineEntry>
         <TimelineEntry>
           <h4>Software Engineer Intern – Bowtie Life Insurance Hong Kong</h4>
           <h5>June 2024 - August 2024</h5>
+          {#snippet details()}
+            <p>First Bowtie stint. Mostly backend Django — cleaned up the API layer, reorganized the database, and fixed a lot of bugs.</p>
+          {/snippet}
         </TimelineEntry>
         <TimelineEntry>
           <h4>IT Technical Intern – iCHEF Hong Kong</h4>
           <h5>June 2023 - August 2023</h5>
+          {#snippet details()}
+            <p>On-site IT work across HK — setting up enterprise networks and iPad POS systems at small businesses and restaurants. Also kicked off a website rebuild in React and Django.</p>
+          {/snippet}
+        </TimelineEntry>
+        <TimelineEntry>
+          <h4>Web Development Consultant – Dotwise Hong Kong</h4>
+          <h5>June 2022 - August 2022</h5>
+          {#snippet details()}
+            <p>Built a landing site for a local marketing consultancy from scratch. Django backend, vanilla JS and CSS on the front.</p>
+          {/snippet}
         </TimelineEntry>
       </div>
       <br />
@@ -79,10 +98,16 @@ onMount(() => {
             Bachelor of Science in Computer Science – Arizona State University
           </h4>
           <h5>August 2022 - December 2025</h5>
+          {#snippet details()}
+            <p>3.96 GPA, Summa Cum Laude.</p>
+          {/snippet}
         </TimelineEntry>
         <TimelineEntry>
           <h4>High School Diploma – Hong Kong International School</h4>
           <h5>August 2019 - May 2022</h5>
+          {#snippet details()}
+            <p>3.63 GPA, High Honors, 5 AP credits.</p>
+          {/snippet}
         </TimelineEntry>
       </div>
     </BackdropWrapper>

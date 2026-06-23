@@ -13,7 +13,6 @@ let { background, children }: { background?: Snippet; children?: Snippet } = $pr
 
 <style>
   .backdrop-wrapper {
-    overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -25,7 +24,6 @@ let { background, children }: { background?: Snippet; children?: Snippet } = $pr
   .backdrop-wrapper > div {
     padding: 5vh;
     background: white;
-    height: 100%;
     width: 100%;
     z-index: 99;
   }

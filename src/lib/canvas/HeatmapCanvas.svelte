@@ -1,6 +1,5 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import { windowSize } from "../stores";
 import { elementVisible } from "../utils";
 
 // Grid resolution in logical pixels — smaller = smoother contours, heavier CPU
@@ -30,7 +29,6 @@ const resizeCanvas = () => {
 	canvas.style.height = `${wrapper.clientHeight}px`;
 };
 
-windowSize.subscribe(() => resizeCanvas());
 
 /** Scalar field — layered sine waves produce organic, flowing "terrain". */
 function sampleField(x: number, y: number, t: number): number {
@@ -172,7 +170,12 @@ onMount(() => {
 		startTime = ts;
 		animation(ts);
 	});
-	return () => cancelAnimationFrame(animationId);
+	const observer = new ResizeObserver(() => resizeCanvas());
+	observer.observe(wrapper);
+	return () => {
+		cancelAnimationFrame(animationId);
+		observer.disconnect();
+	};
 });
 </script>
 

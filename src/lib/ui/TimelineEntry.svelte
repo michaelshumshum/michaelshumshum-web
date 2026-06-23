@@ -67,6 +67,7 @@
   button.timeline-entry {
     background: none;
     border: none;
+    border-left: 2px solid black;
     text-align: left;
     font: inherit;
     color: inherit;

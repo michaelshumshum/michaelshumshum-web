@@ -1,6 +1,5 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import { windowSize } from "../stores";
 import { incrementLoadingSemaphore } from "../utils";
 
 const decrement = incrementLoadingSemaphore();
@@ -47,18 +46,28 @@ function animation() {
 	}, 100);
 }
 
+function resizeCanvas() {
+	canvas.width = canvas.clientWidth * window.devicePixelRatio;
+	canvas.height = canvas.clientHeight * window.devicePixelRatio;
+}
+
 onMount(() => {
+	resizeCanvas();
+
+	// Observing the canvas's own box (rather than `window`'s resize event)
+	// means mobile Safari toggling its toolbar during scroll — which fires
+	// `resize` without actually changing the canvas's 100vw/100vh layout
+	// size — no longer forces an expensive backing-store reallocation
+	// mid-scroll. Same fix already applied to MatrixCanvas/HeatmapCanvas.
+	const observer = new ResizeObserver(resizeCanvas);
+	observer.observe(canvas);
+
 	createTexts().then(() => {
 		decrement();
 		animation();
 	});
-	windowSize.subscribe((w) => {
-		if (canvas) {
-			canvas.width = w.width * window.devicePixelRatio;
-			canvas.height = w.height * window.devicePixelRatio;
-		}
-	});
-	animation();
+
+	return () => observer.disconnect();
 });
 </script>
 

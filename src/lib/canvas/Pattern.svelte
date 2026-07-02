@@ -6,67 +6,60 @@ const decrement = incrementLoadingSemaphore();
 
 const _font_size = 8;
 const _text_length = 500;
+const _step_ms = 100;
 
 let { baseText }: { baseText: string } = $props();
 
+// The animation shifts every row's text window by one character per tick,
+// which is exactly equivalent to the whole image scrolling up one row per
+// tick with period `cycle` (= baseText.length + 1). So instead of
+// re-rasterizing a full-screen canvas 10x/second (a main-thread +
+// texture-upload cost that caused jank on mobile), draw the pattern once
+// into a buffer one cycle taller than the viewport and loop a
+// compositor-only CSS steps() transform over it.
 const texts: string[] = [];
 let canvas: HTMLCanvasElement;
-let currentIndex = 0;
 
-async function createTexts() {
+function createTexts() {
 	const text = `${baseText} `.repeat(_text_length / baseText.length);
 	for (let i = 0; i < baseText.length + 1; i++) {
 		texts.push(text.slice(i, i + _text_length));
 	}
 }
 
-function animation() {
-	currentIndex = (currentIndex + 1) % texts.length;
-
+function draw() {
+	const parent = canvas.parentElement;
 	const ctx = canvas.getContext("2d");
-	if (!ctx) {
+	if (!parent || !ctx) {
 		return;
 	}
 
-	// clear canvas
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	const dpr = window.devicePixelRatio;
+	const cycle = texts.length;
+	const rows = Math.ceil(parent.clientHeight / _font_size) + cycle;
+	canvas.width = parent.clientWidth * dpr;
+	canvas.height = rows * _font_size * dpr;
+	canvas.style.height = `${rows * _font_size}px`;
+	canvas.style.setProperty("--cycle-shift", `-${cycle * _font_size}px`);
+	canvas.style.animationDuration = `${cycle * _step_ms}ms`;
+	canvas.style.animationTimingFunction = `steps(${cycle})`;
 
 	ctx.fillStyle = "rgba(0,0,0,0.2)";
-	ctx.font = `${_font_size * window.devicePixelRatio}px monospace`;
-	for (let i = 0; i < Math.ceil(canvas.height / _font_size); i++) {
-		ctx.fillText(
-			texts[(currentIndex + i) % texts.length],
-			0,
-			i * _font_size * window.devicePixelRatio,
-		);
+	ctx.font = `${_font_size * dpr}px monospace`;
+	for (let i = 0; i < rows; i++) {
+		ctx.fillText(texts[i % cycle], 0, i * _font_size * dpr);
 	}
-
-	setTimeout(() => {
-		requestAnimationFrame(animation);
-	}, 100);
-}
-
-function resizeCanvas() {
-	canvas.width = canvas.clientWidth * window.devicePixelRatio;
-	canvas.height = canvas.clientHeight * window.devicePixelRatio;
 }
 
 onMount(() => {
-	resizeCanvas();
+	createTexts();
+	draw();
+	decrement();
 
-	// Observing the canvas's own box (rather than `window`'s resize event)
-	// means mobile Safari toggling its toolbar during scroll — which fires
-	// `resize` without actually changing the canvas's 100vw/100vh layout
-	// size — no longer forces an expensive backing-store reallocation
-	// mid-scroll. Same fix already applied to MatrixCanvas/HeatmapCanvas.
-	const observer = new ResizeObserver(resizeCanvas);
-	observer.observe(canvas);
-
-	createTexts().then(() => {
-		decrement();
-		animation();
-	});
-
+	const observer = new ResizeObserver(draw);
+	if (canvas.parentElement) {
+		observer.observe(canvas.parentElement);
+	}
 	return () => observer.disconnect();
 });
 </script>
@@ -79,8 +72,13 @@ onMount(() => {
     left: 0;
     top: 0;
     width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    object-position: 50% 50%;
+    will-change: transform;
+    animation: pattern-shift 1600ms steps(16) infinite;
+  }
+
+  @keyframes pattern-shift {
+    to {
+      transform: translateY(var(--cycle-shift, -128px));
+    }
   }
 </style>

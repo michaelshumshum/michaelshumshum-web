@@ -40,6 +40,11 @@ const resizeCanvas = () => {
 // so hold the current frame until scrolling settles.
 let lastScrollTs = 0;
 
+function regenerate() {
+	const necessaryLines = Math.ceil(canvas.height / _font_size * 1.1);
+	text = randomString(charsPerLine * necessaryLines);
+}
+
 function animation() {
 	if (
 		wrapper &&
@@ -47,8 +52,7 @@ function animation() {
 		charsPerLine > 0 &&
 		Date.now() - lastScrollTs > 150
 	) {
-		const necessaryLines = Math.ceil(canvas.height / _font_size * 1.1);
-		text = randomString(charsPerLine * necessaryLines);
+		regenerate();
 	}
 	setTimeout(() => {
 		requestAnimationFrame(animation);
@@ -58,6 +62,10 @@ function animation() {
 onMount(() => {
 	ctx = canvas.getContext("2d");
 	resizeCanvas();
+	// Prepaint the first frame even though the section starts below the
+	// fold: the loop only regenerates when visible and settled, so without
+	// this the canvas would scroll into view blank.
+	regenerate();
 	animation();
 	const observer = new ResizeObserver(() => resizeCanvas());
 	observer.observe(wrapper);

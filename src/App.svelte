@@ -8,13 +8,12 @@ if (
 
 
 import { onMount } from "svelte";
-import { get } from "svelte/store";
 import HeatmapCanvas from "./lib/canvas/HeatmapCanvas.svelte";
 import MatrixCanvas from "./lib/canvas/MatrixCanvas.svelte";
 import BackdropWrapper from "./lib/sections/BackdropWrapper.svelte";
 import Footer from "./lib/sections/Footer.svelte";
 import HeroHeader from "./lib/sections/HeroHeader.svelte";
-import { loadingSemaphore, scrollPosition } from "./lib/stores";
+import { loadingSemaphore } from "./lib/stores";
 import DownloadLink from "./lib/ui/DownloadLink.svelte";
 import HoverTooltip from "./lib/ui/HoverTooltip.svelte";
 import IconLink from "./lib/ui/IconLink.svelte";
@@ -32,7 +31,7 @@ loadingSemaphore.subscribe((value) => {
 
 onMount(() => {
 	setTimeout(() => {
-		if (get(scrollPosition) === 0) {
+		if (window.scrollY === 0) {
 			window.scrollBy({
 				top: window.innerHeight,
 				behavior: "smooth",

@@ -35,8 +35,18 @@ const resizeCanvas = () => {
 	}
 };
 
+// Regenerating the text redraws and re-uploads the full section-sized
+// canvas texture; doing that mid-scroll causes visible hitches on mobile,
+// so hold the current frame until scrolling settles.
+let lastScrollTs = 0;
+
 function animation() {
-	if (wrapper && elementVisible(wrapper) && charsPerLine > 0) {
+	if (
+		wrapper &&
+		elementVisible(wrapper) &&
+		charsPerLine > 0 &&
+		Date.now() - lastScrollTs > 150
+	) {
 		const necessaryLines = Math.ceil(canvas.height / _font_size * 1.1);
 		text = randomString(charsPerLine * necessaryLines);
 	}
@@ -51,7 +61,14 @@ onMount(() => {
 	animation();
 	const observer = new ResizeObserver(() => resizeCanvas());
 	observer.observe(wrapper);
-	return () => observer.disconnect();
+	const onScroll = () => {
+		lastScrollTs = Date.now();
+	};
+	window.addEventListener("scroll", onScroll, { passive: true });
+	return () => {
+		observer.disconnect();
+		window.removeEventListener("scroll", onScroll);
+	};
 });
 </script>
 

@@ -26,10 +26,7 @@ export function elementVisible(el: HTMLElement): boolean {
 	const width = window.innerWidth || document.documentElement.clientWidth;
 
 	return (
-		((rect.top >= 0 && rect.top <= height) ||
-			(rect.bottom >= 0 && rect.bottom <= height)) &&
-		((rect.left >= 0 && rect.left <= width) ||
-			(rect.right >= 0 && rect.right <= width))
+		rect.top < height && rect.bottom > 0 && rect.left < width && rect.right > 0
 	);
 }
 /**
